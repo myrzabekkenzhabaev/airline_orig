@@ -4,6 +4,30 @@
 <div class="card shadow-lg p-4">
     <h2 class="text-center">{{ flight.origin }} → {{ flight.destination }}</h2>
     <p class="text-muted text-center">Длительность: <strong>{{ flight.duration }} минут</strong></p>
+    <p class="text-muted text-center">Вместимость: <strong>{{ flight.capacity }} человек</strong></p>
+    
+    {% if flight.capacity == 0 %}
+        <p style="color: red;">  Бронирование на рейс закрыто. Рейс полон</p>
+    {% endif %}
+
+    {% if flight.capacity != 0 %}
+    <h2>Бронирование на рейс:</h2>
+    <form method="post" class = "mb-3" >
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            
+            <!-- мыло -->
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+            <input type="text" name="f_name" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon1">
+            <button type="submit" class="btn btn-outline-success">Забронировать</button>
+          
+        </div>
+            
+
+    </form>
+    {% endif %}
+
     <a href="/" class="btn btn-outline-primary">Назад</a>
 </div>
 {% endblock %}

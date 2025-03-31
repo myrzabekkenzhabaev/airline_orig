@@ -1,20 +1,22 @@
 {% extends 'flights/base.html' %}
-{% block title %}Аэропорт {{ airport. City }}{% endblock %}
+{% block title %}Аэропорт {{ airport.city }}{% endblock %}
 {% block content %}
 <h1 class="text-center">{{ airport.city }} ({{ airport.code }})</h1>
 
 <h3 class="mt-4">Вылеты</h3>
 <ul class="list-group">
-    {% for flight in airport.departures.all %}
-        <li class="list-group-item">{{ flight.destination }} ({{ flight.duration }} мин)</li>
+    {% for departure in departures %}
+        <a href="{% url 'flight_detail' departure.id %}"><li class="list-group-item">{{ departure.origin }} - {{ departure.destination }} ({{ departure.duration }} мин)</li> </a>
     {% endfor %}
 </ul>
 
+
 <h3 class="mt-4">Прилеты</h3>
 <ul class="list-group">
-    {% for flight in airport.arrivals.all %}
-        <li class="list-group-item">{{ flight.origin }} ({{ flight.duration }} мин)</li>
-    {% endfor %}
+    {% for arrival in arrivals %}
+    <a href="{% url 'flight_detail' arrival.id %}"><li class="list-group-item">{{ arrival.origin }} - {{ arrival.destination }} ({{ arrival.duration }} мин)</li>
+    </a>
+        {% endfor %}
 </ul>
 
 <a href="/" class="btn btn-outline-secondary mt-4">Назад</a>
