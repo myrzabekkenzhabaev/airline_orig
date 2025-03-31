@@ -1,0 +1,31 @@
+{% extends 'flights/base.html' %}
+{% block title %}Все рейсы{% endblock %}
+{% block content %}
+<h1 class="text-center mb-4">Список рейсов</h1>
+<div class="row">
+    {% for flight in flights %}
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ flight.origin }} → {{ flight.destination }}</h5>
+                <p class="card-text">Длительность: {{ flight.duration }} мин</p>
+                <a href="{% url 'flight_detail' flight.id %}" class="btn btn-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<h1 class="text-center mb-4">Список аэропортов</h1>
+<div class="row">
+    {% for airport in airports %}
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ airport.city }} ({{ airport.code }}) </h5>
+                <a href="{% url 'airport_detail' airport.id %}" class="btn btn-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

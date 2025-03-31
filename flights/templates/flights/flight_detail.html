@@ -1,0 +1,9 @@
+{% extends 'flights/base.html' %}
+{% block title %}Детали рейса{% endblock %}
+{% block content %}
+<div class="card shadow-lg p-4">
+    <h2 class="text-center">{{ flight.origin }} → {{ flight.destination }}</h2>
+    <p class="text-muted text-center">Длительность: <strong>{{ flight.duration }} минут</strong></p>
+    <a href="/" class="btn btn-outline-primary">Назад</a>
+</div>
+{% endblock %}
