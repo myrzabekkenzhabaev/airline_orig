@@ -1,0 +1,60 @@
+{% extends 'flights/base.html' %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+
+<div class="container form-container">
+    <h3 class="text-center mb-4">Вход в систему</h3>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            {{ form.username.label_tag }}  
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="text-danger">
+                    {% for error in form.username.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3 password-wrapper">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            <div id="view_password" class="fas fa-eye toggle-password" onclick="togglePassword('id_password', 'view_password')" style="cursor: pointer; display: inline-block; margin-top: 5px;">View</div>
+
+            {% if form.password.errors %}
+                <div class="text-danger">
+                    {% for error in form.password.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Войти</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <a href="{% url 'register' %}">Еще нет аккаунта? Зарегистрироваться</a>
+    </div>
+</div>
+
+<script>
+    function togglePassword(fieldId, buttonId) {
+        var field = document.getElementById(fieldId);
+        var icon = document.getElementById(buttonId);
+
+        if (field.type === "password") {
+            field.type = "text";
+            icon.innerText = "Hide";
+        } else {
+            field.type = "password";
+            icon.innerText = "View";
+        }
+    }
+</script>
+
+{% endblock %}
